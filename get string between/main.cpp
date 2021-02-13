@@ -41,10 +41,19 @@ std::string get_string_between_all(const std::string& str, const std::string& st
 
 int main()
 {
-	std::string response = "<BODY>hello world</body>";
-	std::string result = get_string_between_all(response, "<body>", "</body>");
+	std::string response =
+		"<xml>"
+			"<body>"
+				"<summary>"
+					"<param name='param1'>Hello world 1</param>"
+					"<param name='param2'>Hello world 2</param>"
+				"</summary>"
+			"</body>"
+		"</xml>";
 
-	std::cout << result << std::endl;
+
+	std::cout << get_string_between_all(response, "<param name='param1'>", "</param>") << std::endl;
+	std::cout << get_string_between_all(response, "<param name='param2'>", "</param>") << std::endl;
 
 	return std::cin.get();
 }
