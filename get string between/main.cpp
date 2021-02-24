@@ -39,21 +39,51 @@ std::string get_string_between_all(const std::string& str, const std::string& st
 	return get_string_between(tmp1, tmp2, tmp3);
 }
 
+std::string get_string_between_full(const std::string& str, const std::string& start, const std::string& end)
+{
+	size_t pos1 = strpos(str, start);
+	if (pos1 == -1) return "not found start";
+	size_t pos2 = strpos(str, end);
+	if (pos2 == -1) return "not found end";
+
+	size_t len = strpos(str, end, pos1) - pos1;
+	std::cout << pos1 << std::endl;
+	std::cout << pos2 << std::endl;
+	std::cout << len << std::endl;
+	return str.substr(pos1 + start.length(), len - pos1 - 1);
+}
+
+std::string get_string_between_full_str(const std::string& str, const std::string& start, const std::string& end)
+{
+	size_t pos1 = strpos(str, start);
+	if (pos1 == -1) return "not found start";
+	size_t pos2 = strpos(str, end);
+	if (pos2 == -1) return "not found end";
+
+	size_t len = strpos(str, end, pos1) - pos1;
+	std::cout << pos1 << std::endl;
+	std::cout << pos2 << std::endl;
+	std::cout << len << std::endl;
+	
+	return str.substr(pos1, pos2 - pos1 + end.length());
+}
+
 int main()
 {
 	std::string response =
 		"<xml>"
 			"<body>"
 				"<summary>"
-					"<param name='param1'>Hello world 1</param>"
-					"<param name='param2'>Hello world 2</param>"
+					"<param name='param1'>Hello world 1 555 666 777 65656 mai ru na haha hihihihi</param>"
+					"<param name='param2'>Hello world 2 888 999 000</param>"
 				"</summary>"
 			"</body>"
 		"</xml>";
 
 
-	std::cout << get_string_between_all(response, "<param name='param1'>", "</param>") << std::endl;
-	std::cout << get_string_between_all(response, "<param name='param2'>", "</param>") << std::endl;
+	//std::cout << get_string_between_all(response, "<param name='param1'>", "</param>") << std::endl;
+	//std::cout << get_string_between_all(response, "<param name='param2'>", "</param>") << std::endl;
+	std::cout << get_string_between_full_str(response, "<param name='param1'>", "</param>") << std::endl;
 
 	return std::cin.get();
 }
